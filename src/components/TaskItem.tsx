@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface Task {
   id: string;
   title: string;
@@ -14,7 +12,17 @@ export interface TaskItemProps {
 
 export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
   return (
-    <div>
+    <li
+      role="listitem"
+      aria-label={`Task: ${task.title}`}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        padding: '8px',
+        borderBottom: '1px solid #eee',
+      }}
+    >
       <input
         type="checkbox"
         id={`task-${task.id}`}
@@ -22,9 +30,16 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
         onChange={() => onToggle(task.id)}
         aria-label={`Mark "${task.title}" as ${task.completed ? 'incomplete' : 'complete'}`}
       />
-
+      <label
+        htmlFor={`task-${task.id}`}
+        style={{
+          flex: 1,
+          textDecoration: task.completed ? 'line-through' : 'none',
+          color: task.completed ? '#888' : 'inherit',
+        }}
+      >
         {task.title}
-
+      </label>
       <button
         onClick={() => onDelete(task.id)}
         aria-label={`Delete "${task.title}"`}
@@ -39,6 +54,6 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
       >
         Delete
       </button>
-    </div>
+    </li>
   );
 }

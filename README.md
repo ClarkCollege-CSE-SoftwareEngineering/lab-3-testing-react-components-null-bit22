@@ -1,6 +1,37 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/OFlm_OiO)
 # Lab 3: Testing React Components
 
+Lab 3 for the CSE325 Software Design course at Clark College. Utilizes Kent Dodd's Testing Library in React to practice component testing principles. This lab demonstrates the differences between testing queries like `getBy`, `queryBy`, and `findBy` and uses the query priority heirarchy for when to use one query over another. 
+
+The code sets up a rudimentary task management framework and directly tests components that a regular user would interact with.
+
+## Reflection Questions
+
+### 2.2
+
+**Question:** Notice how we're using `getByRole` with accessible names like `name: /delete "task to delete"/i`. How does this approach differ from using `getByTestId('delete-button')`? Which approach better reflects how users interact with the UI? (Hint: Consider Kent C. Dodds' guiding principle from your readings.)
+
+**Answer:** Using the `getByRole` query is directly querying what a user would interact with and see, whereas the `getByTestId` query is querying the implemntation details of the code (looking for a button where `id=delete-button`). Users do not see this implementation detail, and by directly querying and testing what a user would interact with, it gives us more confidence in building our tests and application. 
+
+### 3.2
+
+**Question:** We used `queryByRole('alert')` instead of `getByRole('alert')` when checking that an error message does NOT exist. Why? What would happen if we used getByRole for an element that doesn't exist? 
+
+**Answer:** `queryByRole` is useful for checking when a component does NOT exist because it returns `null` if the component is not found (which is what we are wanting to test for in this case). If instead we used the `getByRole` query, it would throw an error if the component is not found. We don't want to throw an error here, we only want to test to check that the component does not exist.
+
+### 4.3
+
+**Question:** Compare how we used `screen.findByText` (returns a Promise, waits for element) versus `screen.getByText` (synchronous, throws immediately if not found). When should you use each? How does this connect to the discussion of findBy queries in the React Testing Library documentation?
+
+**Answer:** `findBy` queries are used for asysnchronous queries where you may need to wait for something to dynamically load or appear on the screen after a certain event gets triggered. `getBy` is used for components that MUST exist at the time of calling the test. Both queries will throw an error if no match is found, but `findBy` will wait for a specified timeout period before the error occurs. 
+
+## Key Concepts
+
+The difference between query methods like getBy, findBy, and queryBy, and also the query heirarchy: how you should always test for things that the user can see/interact with rather than implementation details. Also mocking API functions with the Vitest library and breaking down code to test one thing at a time. 
+
+
+# ------ Lab Directions ------
+
 ## Week 3 | Testing III
 
 ## Overview
