@@ -109,5 +109,29 @@ describe('AddTaskForm', () => {
       const input = screen.getByLabelText(/task title/i);
       expect(input).toHaveAttribute('aria-invalid', 'true');
     });
+
+    // Edge Case Test 1
+    it('shows error when trying to add whitespace task', async () => {
+      const user = userEvent.setup();
+
+      render(<AddTaskForm onAdd={vi.fn()} />);
+
+      await user.type(screen.getByLabelText(/task title/i), '        ');
+      await user.click(screen.getByRole('button', { name: /add task/i }));
+
+      expect(screen.getByRole('alert')).toHaveTextContent(/task title is required/i);
+    })
   });
+
+  // Edge case test 2
+  it('shows error for tasks with long titles', async () => {
+    const user = userEvent.setup();
+
+    render(<AddTaskForm onAdd={vi.fn()} />);
+
+    await user.type(screen.getByLabelText(/task title/i), 'Tomorrow is the big day. I will steal the moon with the help of all my loyal minions. Muahahahahaha!');
+    await user.click(screen.getByRole('button', { name: /add task/i }));
+
+    expect(screen.getByRole('alert')).toHaveTextContent(/less than 30/i); 
+  })
 });

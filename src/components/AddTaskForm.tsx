@@ -23,6 +23,12 @@ export function AddTaskForm({ onAdd }: AddTaskFormProps) {
       return;
     }
 
+    // Add edge case for very long titles
+    if (trimmedTitle.length > 30) {
+      setError('Task title must be less than 30 characters');
+      return;
+    }
+
     onAdd(trimmedTitle);
     setTitle('');
     setError(null);
