@@ -1,6 +1,8 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/OFlm_OiO)
 # Lab 3: Testing React Components
 
+Patrick Neill - 1/26/26 
+
 Lab 3 for the CSE325 Software Design course at Clark College. Utilizes Kent Dodd's Testing Library in React to practice component testing principles. This lab demonstrates the differences between testing queries like `getBy`, `queryBy`, and `findBy` and uses the query priority heirarchy for when to use one query over another. 
 
 The code sets up a rudimentary task management framework and directly tests components that a regular user would interact with.
